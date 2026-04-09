@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../axiosConfig';  // ← SEUL CHANGEMENT ICI
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -193,4 +193,3 @@ const ProductEditScreen = () => {
 };
 
 export default ProductEditScreen;
-
