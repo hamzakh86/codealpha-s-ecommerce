@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axiosConfig';  // ← Changé ici
 import {
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
@@ -302,4 +302,3 @@ export const updateUser = (user) => async (dispatch, getState) => {
     });
   }
 };
-
