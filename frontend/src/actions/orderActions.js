@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axiosConfig';  // ← Changé ici
 import {
   ORDER_CREATE_REQUEST,
   ORDER_CREATE_SUCCESS,
@@ -261,4 +261,3 @@ export const listOrders = () => async (dispatch, getState) => {
     });
   }
 };
-
