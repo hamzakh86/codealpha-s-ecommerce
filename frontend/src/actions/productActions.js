@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axiosConfig';  // ← Changé ici
 import {
   PRODUCT_LIST_REQUEST,
   PRODUCT_LIST_SUCCESS,
@@ -246,4 +246,3 @@ export const listTopProducts = () => async (dispatch) => {
     });
   }
 };
-
