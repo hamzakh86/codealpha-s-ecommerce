@@ -36,7 +36,10 @@ const upload = multer({
 });
 
 router.post('/', upload.single('image'), (req, res) => {
-  res.send(`/${req.file.path}`);
+
+  const baseUrl = process.env.RENDER_EXTERNAL_URL || `http://localhost:${process.env.PORT || 5000}`;
+  const imageUrl = `${baseUrl}/${req.file.path}`;
+  res.send(imageUrl);
 });
 
 export default router;
