@@ -20,6 +20,16 @@ import {
 } from '../actions/productActions';
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants';
 
+// Fonction pour obtenir l'URL complète de l'image
+const getImageUrl = (imagePath) => {
+  if (!imagePath) return '';
+  if (imagePath.startsWith('http')) return imagePath;
+  if (imagePath.startsWith('/uploads')) {
+    return `https://codealpha-s-ecommerce.onrender.com${imagePath}`;
+  }
+  return imagePath;
+};
+
 const ProductScreen = () => {
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
@@ -82,7 +92,7 @@ const ProductScreen = () => {
           <Meta title={product.name} />
           <Row>
             <Col md={6}>
-              <Image src={product.image} alt={product.name} fluid />
+              <Image src={getImageUrl(product.image)} alt={product.name} fluid />
             </Col>
             <Col md={3}>
               <ListGroup variant='flush'>
@@ -233,4 +243,3 @@ const ProductScreen = () => {
 };
 
 export default ProductScreen;
-
