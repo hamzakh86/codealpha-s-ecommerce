@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axiosConfig';  // ← Changé ici
 import {
   CART_ADD_ITEM,
   CART_REMOVE_ITEM,
@@ -50,4 +50,3 @@ export const savePaymentMethod = (data) => (dispatch) => {
 
   localStorage.setItem('paymentMethod', JSON.stringify(data));
 };
-
