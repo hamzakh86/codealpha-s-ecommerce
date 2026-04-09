@@ -2,6 +2,7 @@ import path from 'path';
 import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
+import morgan from 'morgan';
 import cors from 'cors';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js';
@@ -17,8 +18,30 @@ connectDB();
 
 const app = express();
 
-// Enable CORS for all routes
-app.use(cors());
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
+
+// Configuration CORS sécurisée
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'http://localhost:3000' // Autorise également le développement local
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Autorise les requêtes sans origine (comme les applications mobiles ou curl)
+    // ou si l'origine est dans la liste autorisée
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Non autorisé par CORS'));
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
@@ -53,10 +76,7 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(
   PORT,
-  '0.0.0.0',
-  () => {
-    console.log(
-      `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
-    );
-  }
+  console.log(
+    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
+  )
 );
