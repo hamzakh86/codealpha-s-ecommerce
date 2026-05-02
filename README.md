@@ -99,6 +99,13 @@ cd frontend
 npm start
 ```
 
+### 🐳 Running with Docker
+If you have Docker and Docker Compose installed, you can start the entire application (frontend + backend) with a single command:
+```bash
+docker-compose up --build
+```
+This will automatically build the images and run the containers on their respective ports.
+
 ## 👤 Test Accounts
 
 ### Admin User
