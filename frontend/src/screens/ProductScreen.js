@@ -95,24 +95,29 @@ const ProductScreen = () => {
               <Image src={getImageUrl(product.image)} alt={product.name} fluid />
             </Col>
             <Col md={3}>
-              <ListGroup variant='flush'>
-                <ListGroup.Item>
-                  <h3>{product.name}</h3>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Rating
-                    value={product.rating}
-                    text={`${product.numReviews} reviews`}
-                  />
-                </ListGroup.Item>
-                <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
-                <ListGroup.Item>
-                  Description: {product.description}
-                </ListGroup.Item>
-              </ListGroup>
+              <div className="glass-panel p-3 mb-4">
+                <ListGroup variant='flush'>
+                  <ListGroup.Item>
+                    <h3>{product.name}</h3>
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <Rating
+                      value={product.rating}
+                      text={`${product.numReviews} reviews`}
+                    />
+                  </ListGroup.Item>
+                  <ListGroup.Item className="fw-bold fs-4 text-warning">
+                    Price: ${product.price}
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <span className="text-muted d-block mb-1">Description:</span>
+                    {product.description}
+                  </ListGroup.Item>
+                </ListGroup>
+              </div>
             </Col>
             <Col md={3}>
-              <Card>
+              <Card className="glass-panel">
                 <ListGroup variant='flush'>
                   <ListGroup.Item>
                     <Row>
@@ -127,20 +132,25 @@ const ProductScreen = () => {
                     <Row>
                       <Col>Status:</Col>
                       <Col>
-                        {product.countInStock > 0 ? 'In Stock' : 'Out Of Stock'}
+                        {product.countInStock > 0 ? (
+                          <span className="badge bg-success">In Stock</span>
+                        ) : (
+                          <span className="badge bg-danger">Out Of Stock</span>
+                        )}
                       </Col>
                     </Row>
                   </ListGroup.Item>
 
                   {product.countInStock > 0 && (
                     <ListGroup.Item>
-                      <Row>
+                      <Row className="align-items-center">
                         <Col>Qty</Col>
                         <Col>
                           <Form.Control
                             as='select'
                             value={qty}
                             onChange={(e) => setQty(e.target.value)}
+                            className="bg-dark text-white border-secondary"
                           >
                             {[...Array(product.countInStock).keys()].map(
                               (x) => (
@@ -157,12 +167,12 @@ const ProductScreen = () => {
 
                   <ListGroup.Item>
                     <Button
-                      className='btn-block'
+                      className='btn-block btn-primary w-100 mt-2 py-2'
                       type='button'
                       disabled={product.countInStock === 0}
                       onClick={addToCartHandler}
                     >
-                      Add To Cart
+                      <i className="fas fa-shopping-cart me-2"></i> Add To Cart
                     </Button>
                   </ListGroup.Item>
                 </ListGroup>
